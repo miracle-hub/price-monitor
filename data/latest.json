@@ -1,0 +1,86 @@
+[
+  {
+    "name": "维生素C",
+    "category": "vitamin",
+    "spec": "饲料级",
+    "unit": "元/kg",
+    "region": "华东",
+    "price": 24.17,
+    "prevPrice": 24.17,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": 0.0
+  },
+  {
+    "name": "维生素E",
+    "category": "vitamin",
+    "spec": "食品级",
+    "unit": "元/kg",
+    "region": "华东",
+    "price": 71.41,
+    "prevPrice": 71.42,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": -0.01
+  },
+  {
+    "name": "维生素A",
+    "category": "vitamin",
+    "spec": "饲料级",
+    "unit": "元/kg",
+    "region": "华东",
+    "price": 172.88,
+    "prevPrice": 170.04,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": 1.67
+  },
+  {
+    "name": "维生素B1",
+    "category": "vitamin",
+    "spec": "医药级",
+    "unit": "元/kg",
+    "region": "华东",
+    "price": 168.55,
+    "prevPrice": 164.29,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": 2.59
+  },
+  {
+    "name": "丙酮",
+    "category": "solvent",
+    "spec": "工业级",
+    "unit": "元/吨",
+    "region": "华东",
+    "price": 6995.23,
+    "prevPrice": 6850.68,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": 2.11
+  },
+  {
+    "name": "冰醋酸",
+    "category": "solvent",
+    "spec": "99.8%",
+    "unit": "元/吨",
+    "region": "华东",
+    "price": 3000.6,
+    "prevPrice": 2992.03,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": 0.29
+  },
+  {
+    "name": "二甲苯",
+    "category": "solvent",
+    "spec": "异构级",
+    "unit": "元/吨",
+    "region": "华东",
+    "price": 6828.32,
+    "prevPrice": 7002.09,
+    "updatedAt": "2026-08-14",
+    "source": "mock",
+    "changeRate": -2.48
+  }
+]

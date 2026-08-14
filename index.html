@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>化工原料每日价格看板</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">化工原料每日价格</div>
+    <div class="updated" id="updated">加载中…</div>
+  </header>
+
+  <div class="legend">
+    <span class="badge up">红 = 涨</span>
+    <span class="badge down">绿 = 跌</span>
+    <span class="hint">数据仅供参考，以实际成交为准</span>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-cat="all">全部</button>
+    <button class="tab" data-cat="vitamin">维生素</button>
+    <button class="tab" data-cat="solvent">有机溶剂</button>
+  </nav>
+
+  <main id="board" class="board"></main>
+
+  <footer class="foot">价格由爬虫定时采集 · 托管于 GitHub Pages</footer>
+
+  <script src="assets/js/format.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

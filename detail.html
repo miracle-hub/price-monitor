@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>品种详情 · 化工原料每日价格</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="index.html">← 返回</a>
+    <div class="brand" id="title">详情</div>
+  </header>
+
+  <main class="detail">
+    <div class="head">
+      <div>
+        <div class="d-name" id="d-name"></div>
+        <div class="d-meta" id="d-meta"></div>
+      </div>
+      <div class="d-price"><b id="d-price"></b> <span id="d-unit"></span></div>
+    </div>
+    <div class="d-change badge" id="d-change"></div>
+
+    <div class="chart-wrap"><div id="trend" style="width:100%;height:340px;"></div></div>
+
+    <h3>近 30 日价格</h3>
+    <table class="recent" id="recent"></table>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="assets/js/format.js"></script>
+  <script src="assets/js/chart.js"></script>
+  <script src="assets/js/detail.js"></script>
+</body>
+</html>

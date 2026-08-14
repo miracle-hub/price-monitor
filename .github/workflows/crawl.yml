@@ -1,0 +1,34 @@
+name: daily-crawl
+
+on:
+  schedule:
+    # 每日 01:00 UTC ≈ 北京时间 09:00，可按需调整
+    - cron: "0 1 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r crawler/requirements.txt
+
+      - name: Run crawler
+        run: python crawler/scraper.py --source all
+
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "chore: update prices $(date +%F)"
+          git push
