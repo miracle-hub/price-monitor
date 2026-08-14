@@ -1,7 +1,7 @@
 # 化工原料每日价格监测（网页版）
 
 托管于 GitHub Pages 的静态价格看板，价格由 GitHub Actions 定时爬虫采集。
-监测品种：已接入「维生素」（数据源：秣宝网 mobaobuy.com 真实公开报价）；「有机溶剂」丙酮/冰醋酸/二甲苯目前以**示例/估算**数据占位演示（见下），待接入真实源。
+监测品种：已接入「维生素」（数据源：秣宝网 mobaobuy.com 真实公开报价）与「有机溶剂」丙酮 / 冰醋酸 / 二甲苯 / 甲醇 / 乙醇（数据源：金投网 jiage.cngold.org 真实公开报价）。均为真实数据，页面标注来源。
 
 ## 功能
 - 今日价格看板（按 维生素 / 有机溶剂 分组，红涨绿跌）
@@ -16,16 +16,17 @@ price-monitor/
 ├── data/                      # 爬虫产出（latest.json / history.json）
 ├── crawler/                   # 爬虫框架与数据源适配器
 │   ├── scraper.py
-│   └── sources/ (mock / example_100ppi / mobaobuy / solvent_demo)
+│   └── sources/ (mock / example_100ppi / mobaobuy / jintou / solvent_demo)
 └── .github/workflows/crawl.yml
 ```
 
 ## 本地运行
 ```bash
 # 1) 生成/更新数据
-python crawler/scraper.py                 # 默认 mobaobuy（真实数据，需联网）
-python crawler/scraper.py --source solvent # 有机溶剂「示例/估算」数据（占位演示）
-python crawler/scraper.py --source all     # 维生素(真实) + 有机溶剂(示例) 合并
+python crawler/scraper.py                  # 默认 all（维生素+有机溶剂，均为真实数据，需联网）
+python crawler/scraper.py --source mobaobuy # 仅维生素（秣宝网真实）
+python crawler/scraper.py --source jintou   # 仅有机溶剂（金投网真实）：丙酮/冰醋酸/二甲苯/甲醇/乙醇
+python crawler/scraper.py --source solvent # 有机溶剂「示例/估算」数据（占位演示，非真实）
 python crawler/scraper.py --source mock   # 本地演示，无需联网
 
 # 2) 启动本地服务器预览（fetch 需经 http，不能用 file:// 直接打开）
@@ -49,20 +50,18 @@ python -m http.server 8000
 - 归并规则：同一标准品名（spuName，如「维生素C原粉」）下多家报价，取**最低价**为当日价，并附 `avgPrice`（均价）/ `brandCount`（厂家数）/ `quoteCount`（报价条数）。
 - 合规：仅读取页面已公开展示的报价数字，未做登录破解；匿名即可获取价格。运行前请确认其 `robots.txt` 与《服务条款》允许抓取。
 
-## 待接入的数据源
-## 有机溶剂（示例 / 估算，占位演示）
-> ⚠️ 丙酮 / 冰醋酸 / 二甲苯 目前**没有在本项目内可合规、稳定抓取的免费公开源**：
-> - 秣宝网（mobaobuy）仅覆盖饲料/维生素类，搜不到这三类溶剂；
-> - 生意社（100ppi）等有 WAF/反爬（"安全检查"Cookie 校验），简单脚本无法稳定获取，且绕过违反其服务条款。
->
-> 因此 `crawler/sources/solvent_demo.py` 仅提供**示例/估算**数据（带 `isSample` 标记，前端显示橙色「示例」徽标），用于演示站点结构。
-> **请勿将其当作真实行情对外发布。** 接入真实源的方式见下文「接更多数据源」。
+### 金投网 jiage.cngold.org（有机溶剂类，真实数据）
+- 覆盖品种：**丙酮、冰醋酸、二甲苯、甲醇、乙醇**（金投网栏目 slug：bingtong / cusuan / erjiaben / jiachun / yichun）。
+- 适配器：`crawler/sources/jintou.py`。采集策略（两跳）：
+  1. 抓取品种栏目页 `https://jiage.cngold.org/<slug>/`，取页面首个 `/c/YYYY-MM-DD/cNNNNNNN.html` 链接（即当日最新报价文章）；
+  2. 抓取该文章页，解析价格表（品名 / 规格 / 价格 / 单位），取首行作为该品种当日参考价。
+- 运行：`python crawler/scraper.py --source jintou`。
+- 合规：金投网 `robots.txt` 仅禁止 `/templets`、`/errorpage` 等管理路径，价格栏目页未被禁止，可合规抓取；其页面声明"所有价格均为参考价格，不具备市场交易依据"，本仓库仅作行情参考展示，已在 `source` 字段标明来源。
 
-运行：`python crawler/scraper.py --source solvent`（或并入 `--source all`）。
+> 关于生意社（100ppi.com）：用户曾建议从其采集。实测该站全站启用华为云 WAF（`HW_CHECK` Cookie 挑战），**首页 / 列表 / sitemap 均无法程序化访问**，仅已知具体 `detail-*.html` 文章 URL 可打开，无法自动定位"当日最新"文章；且绕过 WAF 违反其服务条款，故未采用。若后续获得其授权 API，可参照 `mobaobuy.py` 新建适配器接入。
 
-## 待接入真实数据源（替换示例）
-- 有机溶剂类：丙酮、冰醋酸、二甲苯 —— 请提供**公开可爬的站点清单**或**已授权的 API/付费接口**（如你所在企业已采购的行情服务）。
-- 在 `crawler/sources/` 下新建适配器（参考 `mobaobuy.py` 真实接口写法或 `example_100ppi.py` 模板），实现 `fetch()` 与 `history()`，再到 `scraper.py` 的 `build_sources()` 注册并切换 `--source`。
+## 有机溶剂「示例 / 估算」占位（可选，非真实）
+> `crawler/sources/solvent_demo.py` 仅提供**示例/估算**数据（带 `isSample` 标记，前端显示橙色「示例」徽标），用于站点结构演示。**默认生产流程（`--source all`）已不含此源**，不会误发示例值。如需本地演示带标注的占位数据，可运行 `python crawler/scraper.py --source solvent`。
 
 ## 接更多数据源（通用方法）
 默认示例适配器 `crawler/sources/example_100ppi.py` 为**模板**，需你：

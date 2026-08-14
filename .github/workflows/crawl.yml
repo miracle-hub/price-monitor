@@ -23,7 +23,7 @@ jobs:
         run: pip install -r crawler/requirements.txt
 
       - name: Run crawler
-        run: python crawler/scraper.py --source mobaobuy
+        run: python crawler/scraper.py --source all
 
       - name: Commit data
         run: |

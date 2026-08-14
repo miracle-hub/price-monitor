@@ -37,7 +37,7 @@ async function init() {
   const info = document.getElementById('info-grid');
   if (info) {
     const rows = [
-      ['当日最低/参考价', `${fmtNum(item.price)} ${item.unit || ''}`],
+      ['当日价格', `${fmtNum(item.price)} ${item.unit || ''}`],
       ['近30日均价', item.avgPrice ? `${fmtNum(item.avgPrice)} ${item.unit || ''}` : '—'],
       ['报价条数', item.quoteCount != null ? item.quoteCount : '—'],
       ['厂家数', item.brandCount != null ? item.brandCount : '—'],

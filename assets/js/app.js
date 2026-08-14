@@ -23,7 +23,8 @@ function render() {
   board.innerHTML = list.map(item => {
     const c = formatChange(item.changeRate);
     const sample = item.isSample ? '<span class="badge sample">示例</span>' : '';
-    const cap = item.isSample ? '参考价（示例）' : '当日最低报价';
+    const cap = item.isSample ? '参考价（示例）'
+      : (item.priceLabel || (item.source === '秣宝网' ? '当日最低报价' : '当日参考价'));
     const avg = item.avgPrice ? `<span>均价 ${fmtNum(item.avgPrice)}</span>` : '';
     const brands = item.brandCount ? `<span>${item.brandCount} 家厂</span>` : '';
     const quotes = item.quoteCount ? `<span>${item.quoteCount} 条报价</span>` : '';
