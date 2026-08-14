@@ -2,9 +2,10 @@
 """价格采集主程序。
 
 用法：
-  python crawler/scraper.py --source mock      # 仅 Mock（默认，开箱即用）
-  python crawler/scraper.py --source example   # 仅示例公开源（需先填好适配器）
-  python crawler/scraper.py --source all        # Mock + 示例源合并（生产推荐）
+  python crawler/scraper.py --source mobaobuy   # 仅秣宝网真实维生素报价（生产默认）
+  python crawler/scraper.py --source solvent    # 仅有机溶剂「示例/估算」数据（占位演示）
+  python crawler/scraper.py --source all        # 维生素(真实) + 有机溶剂(示例) 合并
+  python crawler/scraper.py --source example    # 仅示例公开源（需先填好适配器）
 
 输出：
   data/latest.json   当日价格
@@ -21,6 +22,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sources.mock import MockSource
 from sources.example_100ppi import Example100ppiSource
 from sources.mobaobuy import MobaobuySource
+from sources.solvent_demo import SolventDemoSource
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "data")
@@ -38,12 +40,17 @@ def load_existing_history():
 
 def build_sources(source):
     srcs = []
-    if source in ("mock", "all"):
+    if source == "mock":
+        # 纯离线演示（含未标注的示例数据），不并入生产
         srcs.append(MockSource())
     if source in ("mobaobuy", "all"):
         srcs.append(MobaobuySource())
-    if source in ("example", "all"):
+    if source == "example":
+        # 示例公开源模板，需先 pip install requests beautifulsoup4 并填好适配器
         srcs.append(Example100ppiSource())
+    if source in ("solvent", "all"):
+        # 有机溶剂「示例/估算」占位（已标注 isSample）
+        srcs.append(SolventDemoSource())
     return srcs
 
 
@@ -56,7 +63,7 @@ def merge_history(hist, name, today, price):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--source", choices=["mock", "example", "mobaobuy", "all"], default="mobaobuy")
+    ap.add_argument("--source", choices=["mock", "example", "mobaobuy", "solvent", "all"], default="mobaobuy")
     ap.add_argument("--days", type=int, default=30)
     args = ap.parse_args()
 

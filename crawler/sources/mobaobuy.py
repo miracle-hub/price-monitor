@@ -146,6 +146,7 @@ class MobaobuySource(BaseSource):
                 "changeRate": rate,
                 "updatedAt": it.get("updatedAt", ""),
                 "source": it.get("source", self.name),
+                "isSample": bool(it.get("isSample", False)),
                 "avgPrice": it.get("avgPrice"),
                 "brandCount": it.get("brandCount"),
                 "quoteCount": it.get("quoteCount"),

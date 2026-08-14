@@ -22,14 +22,23 @@ function render() {
   if (!list.length) { board.innerHTML = '<p class="err">暂无数据</p>'; return; }
   board.innerHTML = list.map(item => {
     const c = formatChange(item.changeRate);
+    const sample = item.isSample ? '<span class="badge sample">示例</span>' : '';
+    const cap = item.isSample ? '参考价（示例）' : '当日最低报价';
+    const avg = item.avgPrice ? `<span>均价 ${fmtNum(item.avgPrice)}</span>` : '';
+    const brands = item.brandCount ? `<span>${item.brandCount} 家厂</span>` : '';
+    const quotes = item.quoteCount ? `<span>${item.quoteCount} 条报价</span>` : '';
+    const metaBits = [item.spec, item.region].filter(Boolean).join(' · ');
     return `<a class="card" href="detail.html?name=${encodeURIComponent(item.name)}">
       <div class="card-top">
         <span class="cat">${CAT_LABEL[item.category] || ''}</span>
+        ${sample}
         <span class="badge ${c.cls}">${c.text}</span>
       </div>
       <div class="name">${item.name}</div>
-      <div class="meta">${item.spec || ''} · ${item.region || ''}</div>
-      <div class="price"><b>${item.price}</b> <span class="unit">${item.unit || ''}</span></div>
+      <div class="meta">${metaBits}</div>
+      <div class="price"><b>${fmtNum(item.price)}</b> <span class="unit">${item.unit || ''}</span></div>
+      <div class="price-cap">${cap}</div>
+      <div class="price-meta">${avg}${brands}${quotes}</div>
       <div class="src">来源：${item.source || '—'}</div>
     </a>`;
   }).join('');

@@ -1,7 +1,7 @@
 # 化工原料每日价格监测（网页版）
 
 托管于 GitHub Pages 的静态价格看板，价格由 GitHub Actions 定时爬虫采集。
-监测品种：已接入「维生素」（数据源：秣宝网 mobaobuy.com 公开报价）；丙酮、冰醋酸、二甲苯（有机溶剂类）待接入。
+监测品种：已接入「维生素」（数据源：秣宝网 mobaobuy.com 真实公开报价）；「有机溶剂」丙酮/冰醋酸/二甲苯目前以**示例/估算**数据占位演示（见下），待接入真实源。
 
 ## 功能
 - 今日价格看板（按 维生素 / 有机溶剂 分组，红涨绿跌）
@@ -16,7 +16,7 @@ price-monitor/
 ├── data/                      # 爬虫产出（latest.json / history.json）
 ├── crawler/                   # 爬虫框架与数据源适配器
 │   ├── scraper.py
-│   └── sources/ (mock / example_100ppi / mobaobuy)
+│   └── sources/ (mock / example_100ppi / mobaobuy / solvent_demo)
 └── .github/workflows/crawl.yml
 ```
 
@@ -24,6 +24,8 @@ price-monitor/
 ```bash
 # 1) 生成/更新数据
 python crawler/scraper.py                 # 默认 mobaobuy（真实数据，需联网）
+python crawler/scraper.py --source solvent # 有机溶剂「示例/估算」数据（占位演示）
+python crawler/scraper.py --source all     # 维生素(真实) + 有机溶剂(示例) 合并
 python crawler/scraper.py --source mock   # 本地演示，无需联网
 
 # 2) 启动本地服务器预览（fetch 需经 http，不能用 file:// 直接打开）
@@ -48,7 +50,19 @@ python -m http.server 8000
 - 合规：仅读取页面已公开展示的报价数字，未做登录破解；匿名即可获取价格。运行前请确认其 `robots.txt` 与《服务条款》允许抓取。
 
 ## 待接入的数据源
-- 有机溶剂类：丙酮、冰醋酸、二甲苯（在 `crawler/sources/` 下新增适配器，参考 `example_100ppi.py` 模板）。
+## 有机溶剂（示例 / 估算，占位演示）
+> ⚠️ 丙酮 / 冰醋酸 / 二甲苯 目前**没有在本项目内可合规、稳定抓取的免费公开源**：
+> - 秣宝网（mobaobuy）仅覆盖饲料/维生素类，搜不到这三类溶剂；
+> - 生意社（100ppi）等有 WAF/反爬（"安全检查"Cookie 校验），简单脚本无法稳定获取，且绕过违反其服务条款。
+>
+> 因此 `crawler/sources/solvent_demo.py` 仅提供**示例/估算**数据（带 `isSample` 标记，前端显示橙色「示例」徽标），用于演示站点结构。
+> **请勿将其当作真实行情对外发布。** 接入真实源的方式见下文「接更多数据源」。
+
+运行：`python crawler/scraper.py --source solvent`（或并入 `--source all`）。
+
+## 待接入真实数据源（替换示例）
+- 有机溶剂类：丙酮、冰醋酸、二甲苯 —— 请提供**公开可爬的站点清单**或**已授权的 API/付费接口**（如你所在企业已采购的行情服务）。
+- 在 `crawler/sources/` 下新建适配器（参考 `mobaobuy.py` 真实接口写法或 `example_100ppi.py` 模板），实现 `fetch()` 与 `history()`，再到 `scraper.py` 的 `build_sources()` 注册并切换 `--source`。
 
 ## 接更多数据源（通用方法）
 默认示例适配器 `crawler/sources/example_100ppi.py` 为**模板**，需你：
