@@ -20,6 +20,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from sources.mock import MockSource
 from sources.example_100ppi import Example100ppiSource
+from sources.mobaobuy import MobaobuySource
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "data")
@@ -35,21 +36,39 @@ def load_existing_history():
     return {}
 
 
+def build_sources(source):
+    srcs = []
+    if source in ("mock", "all"):
+        srcs.append(MockSource())
+    if source in ("mobaobuy", "all"):
+        srcs.append(MobaobuySource())
+    if source in ("example", "all"):
+        srcs.append(Example100ppiSource())
+    return srcs
+
+
+def merge_history(hist, name, today, price):
+    series = hist.get(name, [])
+    if not series or series[-1]["date"] != today:
+        series.append({"date": today, "price": price})
+    hist[name] = series
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--source", choices=["mock", "example", "all"], default="mock")
+    ap.add_argument("--source", choices=["mock", "example", "mobaobuy", "all"], default="mobaobuy")
     ap.add_argument("--days", type=int, default=30)
     args = ap.parse_args()
 
+    sources = build_sources(args.source)
+
     # 1) 当日价格
     latest = []
-    if args.source in ("mock", "all"):
-        latest += MockSource().fetch()
-    if args.source in ("example", "all"):
+    for src in sources:
         try:
-            latest += Example100ppiSource().fetch()
+            latest += src.fetch()
         except Exception as e:
-            print("[warn] example source failed:", e)
+            print(f"[warn] source {src.name} failed: {e}")
 
     today = datetime.date.today().isoformat()
     for it in latest:
@@ -60,16 +79,30 @@ def main():
 
     # 2) 历史序列
     hist = load_existing_history()
-    if args.source in ("mock", "all") and hasattr(MockSource(), "history"):
-        # Mock 直接提供完整历史
-        hist = MockSource().history(args.days)
-    else:
-        # 追加模式：把当日价格追加到已有历史
-        for it in latest:
-            series = hist.get(it["name"], [])
-            if not series or series[-1]["date"] != today:
-                series.append({"date": today, "price": it["price"]})
-            hist[it["name"]] = series
+    # 2a) 提供完整历史的源（如 mock）直接覆盖其 name
+    for src in sources:
+        if hasattr(src, "history"):
+            try:
+                h = src.history(args.days)
+                if h:
+                    for name, series in h.items():
+                        hist[name] = series
+            except Exception as e:
+                print(f"[warn] {src.name}.history failed: {e}")
+    # 2b) 其余源（mobaobuy/example）按日追加
+    provided = set()
+    for src in sources:
+        if hasattr(src, "history"):
+            try:
+                h = src.history(args.days)
+                if h:
+                    provided |= set(h.keys())
+            except Exception:
+                pass
+    for it in latest:
+        if it["name"] in provided:
+            continue
+        merge_history(hist, it["name"], today, it["price"])
 
     # 3) 写出
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -78,7 +111,7 @@ def main():
     with open(os.path.join(DATA_DIR, "history.json"), "w", encoding="utf-8") as f:
         json.dump(hist, f, ensure_ascii=False, indent=2)
 
-    print(f"[ok] wrote {len(latest)} items, updatedAt={today}")
+    print(f"[ok] wrote {len(latest)} items, history names={len(hist)}, updatedAt={today}")
 
 
 if __name__ == "__main__":
