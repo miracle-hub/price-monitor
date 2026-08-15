@@ -5,6 +5,9 @@ on:
     # 每日北京时间 01:00（凌晨）= UTC 17:00，可按需调整
     - cron: "0 17 * * *"
   workflow_dispatch: {}
+  push:
+    branches:
+      - master
 
 permissions:
   contents: write
