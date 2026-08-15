@@ -581,15 +581,15 @@
     "spec": "",
     "unit": "元/吨",
     "region": "",
-    "price": 870.0,
-    "prevPrice": 870.0,
+    "price": 875.22,
+    "prevPrice": 875.22,
     "changeRate": 0.0,
     "updatedAt": "2026-08-15",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 1016.98,
-    "brandCount": 7,
-    "quoteCount": 13
+    "avgPrice": 1029.22,
+    "brandCount": 6,
+    "quoteCount": 12
   },
   {
     "name": "喷浆玉米皮",
@@ -731,9 +731,9 @@
     "updatedAt": "2026-08-15",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 77000.0,
+    "avgPrice": 76272.73,
     "brandCount": 4,
-    "quoteCount": 12
+    "quoteCount": 11
   },
   {
     "name": "盐酸维生素B1",
@@ -1227,9 +1227,9 @@
     "updatedAt": "2026-08-15",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 1868.02,
-    "brandCount": 5,
-    "quoteCount": 5
+    "avgPrice": 1832.53,
+    "brandCount": 4,
+    "quoteCount": 4
   },
   {
     "name": "小麦粉[面粉]",
