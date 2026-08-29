@@ -1391,7 +1391,7 @@
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-08-29",
-    "changeRate": 2.99
+    "changeRate": 0.0
   },
   {
     "name": "冰醋酸",
@@ -1409,7 +1409,7 @@
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-08-29",
-    "changeRate": 0.52
+    "changeRate": 0.0
   },
   {
     "name": "二甲苯",
@@ -1427,7 +1427,7 @@
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-08-29",
-    "changeRate": 0.9
+    "changeRate": 0.0
   },
   {
     "name": "甲醇",
@@ -1445,7 +1445,7 @@
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-08-29",
-    "changeRate": 0.73
+    "changeRate": 0.0
   },
   {
     "name": "乙醇",
