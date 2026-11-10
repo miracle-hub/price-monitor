@@ -288,6 +288,22 @@
     "quoteCount": 1
   },
   {
+    "name": "精品谷氨酸渣",
+    "category": "vitamin",
+    "spec": "粗蛋白≥75% 粗灰分≤10% 铵盐≤2% 水分≤10%",
+    "unit": "元/吨",
+    "region": "",
+    "price": 2600.0,
+    "prevPrice": 2600.0,
+    "changeRate": 0.0,
+    "updatedAt": "2026-11-10",
+    "source": "mobaobuy",
+    "isSample": false,
+    "avgPrice": 2620.0,
+    "brandCount": 1,
+    "quoteCount": 2
+  },
+  {
     "name": "小麦粉",
     "category": "vitamin",
     "spec": "50kg/袋",
@@ -318,22 +334,6 @@
     "avgPrice": 2624.0,
     "brandCount": 1,
     "quoteCount": 1
-  },
-  {
-    "name": "精品谷氨酸渣",
-    "category": "vitamin",
-    "spec": "粗蛋白≥75% 粗灰分≤10% 铵盐≤2% 水分≤10%",
-    "unit": "元/吨",
-    "region": "",
-    "price": 2640.0,
-    "prevPrice": 2640.0,
-    "changeRate": 0.0,
-    "updatedAt": "2026-11-10",
-    "source": "mobaobuy",
-    "isSample": false,
-    "avgPrice": 2645.0,
-    "brandCount": 1,
-    "quoteCount": 2
   },
   {
     "name": "普通谷氨酸渣",
@@ -379,7 +379,7 @@
     "updatedAt": "2026-11-10",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 897518.0,
+    "avgPrice": 897471.6,
     "brandCount": 4,
     "quoteCount": 5
   },
@@ -459,9 +459,9 @@
     "updatedAt": "2026-11-10",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 164367.99,
+    "avgPrice": 184771.49,
     "brandCount": 3,
-    "quoteCount": 9
+    "quoteCount": 8
   },
   {
     "name": "玉米干酒精糟",
@@ -507,9 +507,9 @@
     "updatedAt": "2026-11-10",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 114472.43,
-    "brandCount": 16,
-    "quoteCount": 37
+    "avgPrice": 111568.55,
+    "brandCount": 17,
+    "quoteCount": 38
   },
   {
     "name": "磷酸一二钙",
@@ -718,22 +718,6 @@
     "avgPrice": 1478.82,
     "brandCount": 1,
     "quoteCount": 2
-  },
-  {
-    "name": "玉米淀粉渣",
-    "category": "vitamin",
-    "spec": "",
-    "unit": "元/吨",
-    "region": "",
-    "price": 1720.26,
-    "prevPrice": 1720.26,
-    "changeRate": 0.0,
-    "updatedAt": "2026-11-10",
-    "source": "mobaobuy",
-    "isSample": false,
-    "avgPrice": 1823.38,
-    "brandCount": 2,
-    "quoteCount": 4
   },
   {
     "name": "大麦粉",
@@ -971,9 +955,9 @@
     "updatedAt": "2026-11-10",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 955.7,
-    "brandCount": 3,
-    "quoteCount": 7
+    "avgPrice": 881.26,
+    "brandCount": 1,
+    "quoteCount": 5
   },
   {
     "name": "含可溶物的玉米干酒精糟",
@@ -987,9 +971,9 @@
     "updatedAt": "2026-11-10",
     "source": "mobaobuy",
     "isSample": false,
-    "avgPrice": 2120.29,
-    "brandCount": 4,
-    "quoteCount": 17
+    "avgPrice": 2071.45,
+    "brandCount": 3,
+    "quoteCount": 11
   },
   {
     "name": "豆粕",
@@ -1094,16 +1078,16 @@
     "spec": "优等品",
     "unit": "元/吨",
     "region": "全国",
-    "price": 8495.0,
+    "price": 8312.5,
     "priceLabel": "当日参考价",
     "source": "金投网",
-    "sourceUrl": "https://jiage.cngold.org/c/2026-11-09/c10868736.html",
+    "sourceUrl": "https://jiage.cngold.org/c/2026-11-10/c10871371.html",
     "isSample": false,
     "avgPrice": null,
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-11-10",
-    "changeRate": -0.15
+    "changeRate": -2.15
   },
   {
     "name": "冰醋酸",
@@ -1112,16 +1096,16 @@
     "spec": "优等品",
     "unit": "元/吨",
     "region": "全国",
-    "price": 4166.67,
+    "price": 4116.67,
     "priceLabel": "当日参考价",
     "source": "金投网",
-    "sourceUrl": "https://jiage.cngold.org/c/2026-11-09/c10868738.html",
+    "sourceUrl": "https://jiage.cngold.org/c/2026-11-10/c10871373.html",
     "isSample": false,
     "avgPrice": null,
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-11-10",
-    "changeRate": -0.79
+    "changeRate": -1.2
   },
   {
     "name": "二甲苯",
@@ -1130,16 +1114,16 @@
     "spec": "异构级",
     "unit": "元/吨",
     "region": "全国",
-    "price": 8200.0,
+    "price": 7762.5,
     "priceLabel": "当日参考价",
     "source": "金投网",
-    "sourceUrl": "https://jiage.cngold.org/c/2026-11-09/c10868613.html",
+    "sourceUrl": "https://jiage.cngold.org/c/2026-11-10/c10871249.html",
     "isSample": false,
     "avgPrice": null,
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-11-10",
-    "changeRate": -3.95
+    "changeRate": -5.34
   },
   {
     "name": "甲醇",
@@ -1148,16 +1132,16 @@
     "spec": "合格品",
     "unit": "元/吨",
     "region": "全国",
-    "price": 3835.0,
+    "price": 3738.33,
     "priceLabel": "当日参考价",
     "source": "金投网",
-    "sourceUrl": "https://jiage.cngold.org/c/2026-11-09/c10868743.html",
+    "sourceUrl": "https://jiage.cngold.org/c/2026-11-10/c10871378.html",
     "isSample": false,
     "avgPrice": null,
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-11-10",
-    "changeRate": 1.99
+    "changeRate": -2.52
   },
   {
     "name": "乙醇",
@@ -1166,15 +1150,15 @@
     "spec": "95%食品级",
     "unit": "元/吨",
     "region": "全国",
-    "price": 5731.67,
+    "price": 5711.67,
     "priceLabel": "当日参考价",
     "source": "金投网",
-    "sourceUrl": "https://jiage.cngold.org/c/2026-11-09/c10868709.html",
+    "sourceUrl": "https://jiage.cngold.org/c/2026-11-10/c10871344.html",
     "isSample": false,
     "avgPrice": null,
     "brandCount": null,
     "quoteCount": null,
     "updatedAt": "2026-11-10",
-    "changeRate": 0.0
+    "changeRate": -0.35
   }
 ]
